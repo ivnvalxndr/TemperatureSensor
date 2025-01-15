@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TemperatureSensor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6e0ca48918170a94e97350a52a3545d359070ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("TemperatureSensor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TemperatureSensor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
