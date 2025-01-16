@@ -32,6 +32,8 @@
             button1 = new Button();
             label2 = new Label();
             label3 = new Label();
+            button2 = new Button();
+            progressBar1 = new ProgressBar();
             SuspendLayout();
             // 
             // label1
@@ -72,11 +74,30 @@
             label3.TabIndex = 3;
             label3.Text = "Неизвестно";
             // 
+            // button2
+            // 
+            button2.Location = new Point(467, 323);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 4;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(467, 277);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(100, 23);
+            progressBar1.TabIndex = 5;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(progressBar1);
+            Controls.Add(button2);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button1);
@@ -93,5 +114,7 @@
         private Button button1;
         private Label label2;
         private Label label3;
+        private Button button2;
+        private ProgressBar progressBar1;
     }
 }
