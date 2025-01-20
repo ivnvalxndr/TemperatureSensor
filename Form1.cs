@@ -37,7 +37,7 @@ namespace TemperatureSensor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string ftpServer = "hidden";  // FTP сервер
+            string ftpServer = "hiddenw";  // FTP сервер
             string remoteDirectory = "/test/";  // Папка на сервере, где находятся файлы
             string remoteFilePattern = "sound*.txt";  // Маска для файлов на FTP
             string localDirectory = @"D:\dt\";  // Папка на локальной машине для сохранения файлов
