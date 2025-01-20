@@ -39,11 +39,11 @@ namespace TemperatureSensor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string ftpServer = "ftp://185.195.27.15:21";
+            string ftpServer = "hidden";
             string remoteFile = @"/test.txt";
             string localFile = @"D:\dt\trr.txt";
-            string userName = "ftpuser";
-            string password = "Zxcvbnm12345";
+            string userName = "hidden";
+            string password = "hidden";
 
             Encoding encoding = Encoding.UTF8; // Specify UTF-8 encoding
 
