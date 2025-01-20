@@ -9,7 +9,7 @@ namespace TemperatureSensor
             InitializeComponent();
         }
 
-        // получаем данные по API (не используется)
+        // РїРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ РїРѕ API (РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ)
         /*private void button1_Click(object sender, EventArgs e)
         {
             const string api = "ca88e8c853d9c9e518c3bfe1f4ff3cae";
@@ -21,7 +21,7 @@ namespace TemperatureSensor
                 {
                     string response = client.DownloadString(url);
 
-                    // Парсим json
+                    // РџР°СЂСЃРёРј json
                     var json = JObject.Parse(response);
                     string temp = json["main"]["temp"].ToString();
                     label3.Text = temp;
@@ -37,23 +37,23 @@ namespace TemperatureSensor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string ftpServer = "hiddenw";  // FTP сервер
-            string remoteDirectory = "/test/";  // Папка на сервере, где находятся файлы
-            string remoteFilePattern = "sound*.txt";  // Маска для файлов на FTP
-            string localDirectory = @"D:\dt\";  // Папка на локальной машине для сохранения файлов
+            string ftpServer = "hiddenw";  // FTP СЃРµСЂРІРµСЂ
+            string remoteDirectory = "/test/";  // РџР°РїРєР° РЅР° СЃРµСЂРІРµСЂРµ, РіРґРµ РЅР°С…РѕРґСЏС‚СЃСЏ С„Р°Р№Р»С‹
+            string remoteFilePattern = "sound*.txt";  // РњР°СЃРєР° РґР»СЏ С„Р°Р№Р»РѕРІ РЅР° FTP
+            string localDirectory = @"D:\dt\";  // РџР°РїРєР° РЅР° Р»РѕРєР°Р»СЊРЅРѕР№ РјР°С€РёРЅРµ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»РѕРІ
             string userName = "hidden";
             string password = "hidden";
 
-            // Запускаем цикл, который будет работать бесконечно
+            // Р—Р°РїСѓСЃРєР°РµРј С†РёРєР», РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ Р±РµСЃРєРѕРЅРµС‡РЅРѕ
             while (true)
             {
                 try
                 {
-                    // Получаем список файлов в директории
+                    // РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ РІ РґРёСЂРµРєС‚РѕСЂРёРё
                     FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpServer + remoteDirectory);
-                    request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;  // Запрос на получение списка файлов
+                    request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;  // Р—Р°РїСЂРѕСЃ РЅР° РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ
                     request.Credentials = new NetworkCredential(userName, password);
-                    request.UsePassive = true;  // Включение пассивного режима FTP
+                    request.UsePassive = true;  // Р’РєР»СЋС‡РµРЅРёРµ РїР°СЃСЃРёРІРЅРѕРіРѕ СЂРµР¶РёРјР° FTP
 
                     FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -61,14 +61,14 @@ namespace TemperatureSensor
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            // Проверяем, что имя файла начинается с "sound" и заканчивается на ".txt"
+                            // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РёРјСЏ С„Р°Р№Р»Р° РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ "sound" Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° ".txt"
                             if (line.Contains("sound") && line.EndsWith(".txt"))
                             {
                                 string fileName = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Last();
-                                string remoteFilePath = ftpServer + remoteDirectory + fileName;  // Полный путь к файлу на сервере
-                                string localFilePath = localDirectory + fileName;  // Путь для сохранения на локальной машине
+                                string remoteFilePath = ftpServer + remoteDirectory + fileName;  // РџРѕР»РЅС‹Р№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РЅР° СЃРµСЂРІРµСЂРµ
+                                string localFilePath = localDirectory + fileName;  // РџСѓС‚СЊ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР° Р»РѕРєР°Р»СЊРЅРѕР№ РјР°С€РёРЅРµ
 
-                                // Скачиваем файл с FTP
+                                // РЎРєР°С‡РёРІР°РµРј С„Р°Р№Р» СЃ FTP
                                 FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(remoteFilePath);
                                 downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
                                 downloadRequest.Credentials = new NetworkCredential(userName, password);
@@ -86,7 +86,7 @@ namespace TemperatureSensor
                                     }
                                 }
 
-                                // После успешного скачивания удаляем файл с сервера
+                                // РџРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕРіРѕ СЃРєР°С‡РёРІР°РЅРёСЏ СѓРґР°Р»СЏРµРј С„Р°Р№Р» СЃ СЃРµСЂРІРµСЂР°
                                 FtpWebRequest deleteRequest = (FtpWebRequest)WebRequest.Create(remoteFilePath);
                                 deleteRequest.Method = WebRequestMethods.Ftp.DeleteFile;
                                 deleteRequest.Credentials = new NetworkCredential(userName, password);
@@ -94,16 +94,16 @@ namespace TemperatureSensor
 
                                 using (FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse())
                                 {
-                                    //MessageBox.Show($"Файл {fileName} успешно удалён с FTP-сервера.");
+                                    //MessageBox.Show($"Р¤Р°Р№Р» {fileName} СѓСЃРїРµС€РЅРѕ СѓРґР°Р»С‘РЅ СЃ FTP-СЃРµСЂРІРµСЂР°.");
                                 }
 
-                                // Чтение локально сохраненного файла
+                                // Р§С‚РµРЅРёРµ Р»РѕРєР°Р»СЊРЅРѕ СЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°
                                 using (StreamReader localReader = new StreamReader(localFilePath))
                                 {
                                     string lineFromFile;
                                     while ((lineFromFile = localReader.ReadLine()) != null)
                                     {
-                                        MessageBox.Show(lineFromFile);  // Выводим строки из файла
+                                        MessageBox.Show(lineFromFile);  // Р’С‹РІРѕРґРёРј СЃС‚СЂРѕРєРё РёР· С„Р°Р№Р»Р°
                                     }
                                 }
                             }
@@ -112,10 +112,10 @@ namespace TemperatureSensor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка при загрузке файла: " + ex.Message);
+                    MessageBox.Show("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„Р°Р№Р»Р°: " + ex.Message);
                 }
 
-                // Пауза перед следующей проверкой (например, 5 секунд)
+                // РџР°СѓР·Р° РїРµСЂРµРґ СЃР»РµРґСѓСЋС‰РµР№ РїСЂРѕРІРµСЂРєРѕР№ (РЅР°РїСЂРёРјРµСЂ, 5 СЃРµРєСѓРЅРґ)
                 Thread.Sleep(5000);
             }
         }
