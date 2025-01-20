@@ -60,6 +60,7 @@
             Controls.Add(button2);
             Controls.Add(label1);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Датчик температуры";
             ResumeLayout(false);
             PerformLayout();
