@@ -11,7 +11,8 @@ namespace TemperatureSensor
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // получаем данные по API (не используется)
+        /*private void button1_Click(object sender, EventArgs e)
         {
             const string api = "ca88e8c853d9c9e518c3bfe1f4ff3cae";
 
@@ -34,7 +35,7 @@ namespace TemperatureSensor
                 throw;
             }
 
-        }
+        }*/
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -67,12 +68,18 @@ namespace TemperatureSensor
                     {
                         bytesRead = responseStream.Read(buffer, 0, buffer.Length);
                         localStreamWriter.Write(encoding.GetString(buffer, 0, bytesRead)); // Decode bytes to string with UTF-8 encoding
-                        totalBytesRead += bytesRead;
-
-                        // Обновляем ProgressBar
-                        //int progressValue = (int)((double)totalBytesRead / contentLength * 100);
-                        //progressBar1.Value = Math.Min(progressValue, 100); // Set to 100 if overflow occurs
+                        totalBytesRead += bytesRead;                      
                     } while (bytesRead != 0);
+                }
+
+                // После успешного скачивания файла, удалим его с FTP-сервера
+                FtpWebRequest deleteRequest = (FtpWebRequest)WebRequest.Create(ftpServer + remoteFile);
+                deleteRequest.Method = WebRequestMethods.Ftp.DeleteFile;
+                deleteRequest.Credentials = new NetworkCredential(userName, password);
+
+                using (FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse())
+                {
+                    MessageBox.Show("Файл успешно удалён с FTP-сервера.");
                 }
 
                 // Создаем объект StreamReader для чтения файла
@@ -83,7 +90,7 @@ namespace TemperatureSensor
                     {                                              
                         // Сохраняем строку в переменную
                         string myVariable = line;
-                        label3.Text = myVariable;
+                        MessageBox.Show(myVariable);
                     }
                 }
             }
